@@ -1,0 +1,16 @@
+.git
+.github
+.claude
+bin
+build
+coverage
+docs
+lib
+vendor
+wads
+*.wad
+*.WAD
+*.zip
+*.gz
+*.log
+.DS_Store

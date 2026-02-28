@@ -1,0 +1,42 @@
+version: 2.0
+shards:
+  ameba:
+    git: https://github.com/crystal-ameba/ameba.git
+    version: 1.6.4
+
+  crinja:
+    git: https://github.com/straight-shoota/crinja.git
+    version: 0.9.0+git.commit.103f6ecb16b8f8aa7f2d32f0ea187d9dd10b4aca
+
+  croupier:
+    git: https://github.com/ralsina/croupier.git
+    version: 0.11.0+git.commit.d21c8656093233c4651787f3374389080bb5c831
+
+  crystalline:
+    git: https://github.com/jtomschroeder/crystalline.git
+    version: 0.1.0+git.commit.e614f1c8b0a321fa74237db3c45bbb36aa3898e2
+
+  docopt:
+    git: https://github.com/ralsina/docopt.cr.git
+    version: 0.3.1
+
+  dotenv:
+    git: https://github.com/gdotdesign/cr-dotenv.git
+    version: 1.0.0
+
+  hace:
+    git: https://github.com/ralsina/hace.git
+    version: 0.8.1
+
+  inotify:
+    git: https://github.com/petoem/inotify.cr.git
+    version: 1.2.0
+
+  kiwi:
+    git: https://github.com/ralsina/kiwi.git
+    version: 0.1.0+git.commit.65059b87771238593a28b2b8b9fdf77d8e2b9e89
+
+  termisu:
+    git: https://github.com/omarluq/termisu.git
+    version: 0.4.1
+

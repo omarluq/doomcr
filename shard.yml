@@ -1,0 +1,21 @@
+name: doomcr
+version: 0.1.0
+authors:
+  - omarluq <omar.luqman@hey.com>
+targets:
+  doomcr:
+    main: src/main.cr
+  hace:
+    main: lib/hace/src/main.cr
+  ameba:
+    main: lib/ameba/src/cli.cr
+dependencies:
+  termisu:
+    github: omarluq/termisu
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+  hace:
+    github: ralsina/hace
+crystal: ">= 1.19.1"
+license: MIT

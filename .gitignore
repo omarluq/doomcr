@@ -1,0 +1,27 @@
+/docs/
+/lib/
+/.shards/
+*.dwarf
+
+# Build artifacts
+/bin/
+/build/
+
+# Profiling output
+/.profile/
+*.data
+*.out
+
+# Coverage output
+/coverage/
+
+# Hace cache
+/.croupier/
+.croupier
+
+.claude/tsc-cache/
+/vendor/doomgeneric/
+
+# Doom data files
+*.wad
+/wads/

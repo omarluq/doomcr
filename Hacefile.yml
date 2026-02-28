@@ -1,0 +1,71 @@
+tasks:
+  docker:build:
+    description: Build Docker image
+    phony: true
+    always_run: true
+    commands: |
+      docker build -t doomcr:latest .
+  docker:run:
+    description: Run Docker image with default IWAD source (shareware)
+    phony: true
+    always_run: true
+    commands: |
+      docker run --rm -it doomcr:latest {{CLI_ARGS}}
+  docker:run:freedoom:
+    description: Run Docker image with Freedoom as IWAD source
+    phony: true
+    always_run: true
+    commands: |
+      docker run --rm -it -e DOOM_WAD_SOURCE=freedoom doomcr:latest {{CLI_ARGS}}
+  # ===========================================
+  # Core Development Tasks
+  # ===========================================
+  spec:
+    description: Run crystal spec
+    phony: true
+    always_run: true
+    commands: |
+      crystal spec
+  format:
+    description: Format code with crystal tool format
+    phony: true
+    always_run: true
+    commands: |
+      crystal tool format
+  format:check:
+    description: Check code formatting without modifying files
+    phony: true
+    always_run: true
+    commands: |
+      crystal tool format --check
+  ameba:
+    description: Run Ameba linter
+    phony: true
+    always_run: true
+    commands: |
+      bin/ameba
+  ameba:fix:
+    description: Run Ameba linter
+    phony: true
+    always_run: true
+    commands: |
+      bin/ameba --fix
+  ameba:gen-config:
+    description: Run Ameba linter
+    phony: true
+    always_run: true
+    commands: |
+      bin/ameba --gen-config
+  clean:
+    description: Clean build artifacts
+    phony: true
+    always_run: true
+    commands: |
+      rm -rf bin/doomcr build .crystal coverage docs
+  all:
+    description: Format, lint, and test
+    default: true
+    phony: true
+    always_run: true
+    commands: |
+      bin/hace format ameba spec
