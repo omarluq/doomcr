@@ -1,6 +1,6 @@
 require "time"
 
-@[Link(ldflags: "#{__DIR__}/../../build/native/libdoomgeneric.a -lm")]
+@[Link(ldflags: "#{__DIR__}/../../libdoomgeneric.a -lm")]
 lib LibDoomGeneric
   fun doomgeneric_Create(argc : Int32, argv : Pointer(Pointer(UInt8))) : Nil
   fun doomgeneric_Tick : Nil

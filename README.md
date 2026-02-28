@@ -35,6 +35,20 @@ Supported runtime flags:
 - `DOOM_SHAREWARE_URL=<url>` to override the shareware download URL
 - `DOOM_WAD=/path/in/container/file.wad` to bypass auto-download
 
+## Native Library
+
+`libdoomgeneric.a` is committed in the repo root and used directly by both local Crystal builds and Docker builds.
+
+If you want to rebuild it:
+
+```bash
+git clone https://github.com/ozkl/doomgeneric vendor/doomgeneric
+chmod +x docker/build_doomgeneric.sh
+./docker/build_doomgeneric.sh
+```
+
+This regenerates `./libdoomgeneric.a`.
+
 ## Development
 
 ```bash

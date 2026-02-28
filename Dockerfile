@@ -16,30 +16,7 @@ COPY shard.yml shard.lock ./
 RUN shards install
 
 COPY src ./src
-COPY vendor/doomgeneric ./vendor/doomgeneric
-
-RUN set -euo pipefail \
-  && doom_src_dir="/app/vendor/doomgeneric/doomgeneric" \
-  && if [[ ! -f "${doom_src_dir}/Makefile" ]]; then echo "Missing vendored doomgeneric source at ${doom_src_dir}"; exit 1; fi \
-  && mkdir -p /app/build/native/obj \
-  && src_obj_line="$(sed -n 's/^SRC_DOOM = //p' "${doom_src_dir}/Makefile" | head -n1)" \
-  && if [[ -z "${src_obj_line}" ]]; then echo "Failed to parse SRC_DOOM"; exit 1; fi \
-  && objs=() \
-  && for obj in ${src_obj_line}; do \
-      src="${obj%.o}.c"; \
-      if [[ "${src}" == "doomgeneric_xlib.c" ]]; then continue; fi; \
-      out="/app/build/native/obj/$(basename "${src%.c}.o")"; \
-      cc -std=c99 -O2 -DNORMALUNIX -DLINUX -DSNDSERV -D_DEFAULT_SOURCE \
-        -I"${doom_src_dir}" \
-        -c "${doom_src_dir}/${src}" \
-        -o "${out}"; \
-      objs+=("${out}"); \
-    done \
-  && cc -std=c99 -O2 -I"${doom_src_dir}" \
-      -c /app/src/native/doomcr_bridge.c \
-      -o /app/build/native/obj/doomcr_bridge.o \
-  && objs+=("/app/build/native/obj/doomcr_bridge.o") \
-  && ar rcs /app/build/native/libdoomgeneric.a "${objs[@]}"
+COPY libdoomgeneric.a ./
 
 RUN crystal build src/main.cr -o /app/bin/doomcr --release
 
