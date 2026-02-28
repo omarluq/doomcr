@@ -184,7 +184,7 @@ class Doomcr::Platform
       r = ((rgb >> 16) & 0xff).to_i
       g = ((rgb >> 8) & 0xff).to_i
       b = (rgb & 0xff).to_i
-      Termisu::Color.rgb(r, g, b).to_ansi256
+      Termisu::Color.rgb(r, g, b)
     end
   end
 end
