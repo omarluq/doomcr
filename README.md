@@ -1,5 +1,7 @@
 # doomcr
 
+<video src="assets/vid.mp4" controls muted loop playsinline></video>
+
 Run `doomgeneric` in a terminal using `termisu` (Crystal).
 
 ## Docker (recommended)
