@@ -7,7 +7,6 @@ RUN apt-get update \
     build-essential \
     ca-certificates \
     curl \
-    git \
     unzip \
   && rm -rf /var/lib/apt/lists/*
 
@@ -17,11 +16,13 @@ COPY shard.yml shard.lock ./
 RUN shards install
 
 COPY src ./src
+COPY vendor/doomgeneric ./vendor/doomgeneric
 
 RUN set -euo pipefail \
-  && git clone --depth=1 https://github.com/ozkl/doomgeneric /tmp/doomgeneric \
+  && doom_src_dir="/app/vendor/doomgeneric/doomgeneric" \
+  && if [[ ! -f "${doom_src_dir}/Makefile" ]]; then echo "Missing vendored doomgeneric source at ${doom_src_dir}"; exit 1; fi \
   && mkdir -p /app/build/native/obj \
-  && src_obj_line="$(sed -n 's/^SRC_DOOM = //p' /tmp/doomgeneric/doomgeneric/Makefile | head -n1)" \
+  && src_obj_line="$(sed -n 's/^SRC_DOOM = //p' "${doom_src_dir}/Makefile" | head -n1)" \
   && if [[ -z "${src_obj_line}" ]]; then echo "Failed to parse SRC_DOOM"; exit 1; fi \
   && objs=() \
   && for obj in ${src_obj_line}; do \
@@ -29,12 +30,12 @@ RUN set -euo pipefail \
       if [[ "${src}" == "doomgeneric_xlib.c" ]]; then continue; fi; \
       out="/app/build/native/obj/$(basename "${src%.c}.o")"; \
       cc -std=c99 -O2 -DNORMALUNIX -DLINUX -DSNDSERV -D_DEFAULT_SOURCE \
-        -I/tmp/doomgeneric/doomgeneric \
-        -c "/tmp/doomgeneric/doomgeneric/${src}" \
+        -I"${doom_src_dir}" \
+        -c "${doom_src_dir}/${src}" \
         -o "${out}"; \
       objs+=("${out}"); \
     done \
-  && cc -std=c99 -O2 -I/tmp/doomgeneric/doomgeneric \
+  && cc -std=c99 -O2 -I"${doom_src_dir}" \
       -c /app/src/native/doomcr_bridge.c \
       -o /app/build/native/obj/doomcr_bridge.o \
   && objs+=("/app/build/native/obj/doomcr_bridge.o") \

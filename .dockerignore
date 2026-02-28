@@ -6,7 +6,9 @@ build
 coverage
 docs
 lib
-vendor
+vendor/*
+!vendor/doomgeneric
+!vendor/doomgeneric/**
 wads
 *.wad
 *.WAD
