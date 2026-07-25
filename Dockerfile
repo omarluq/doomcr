@@ -1,4 +1,4 @@
-FROM crystallang/crystal:1.19.1
+FROM crystallang/crystal:v1.21.0
 
 SHELL ["/bin/bash", "-lc"]
 
