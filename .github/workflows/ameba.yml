@@ -24,6 +24,6 @@ jobs:
       - name: Setup Crystal
         uses: ./.github/actions/setup-crystal
       - name: Run Ameba
-        uses: crystal-ameba/github-action@v0.12.0
+        uses: crystal-ameba/github-action@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
